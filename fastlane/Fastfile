@@ -1,0 +1,45 @@
+fastlane_version "2.57.2"
+
+default_platform :ios
+
+platform :ios do
+
+  desc "Release a new version"
+  lane :release do |options|
+    ensure_git_status_clean
+    ensure_git_branch(branch: 'master')
+    test
+    version = version_bump_podspec(path: "STLocationRequest.podspec", version_number: options[:version])
+    git_commit(
+      path: ["STLocationRequest.podspec"],
+      message: "[STLocationRequest Release 🚀] Bump to #{version}"
+    )
+    add_git_tag(tag: version)
+    push_git_tags()
+    push_to_git_remote()
+    pod_push()
+  end
+
+  desc "Runs all the tests"
+  lane :test do
+    scan(
+      project: "STLocationRequest.xcodeproj",
+      scheme: "STLocationRequest",
+      clean: true,
+      code_coverage: true
+    )
+    pod_lib_lint(allow_warnings: true)
+  end
+
+  desc "Runs coverage"
+  lane :coverage do
+    slather(
+      proj: "STLocationRequest.xcodeproj",
+      scheme: "STLocationRequest",
+      travis: true,
+      cobertura_xml: true,
+      ignore: ["Tests/*"]
+    )
+  end
+  
+end

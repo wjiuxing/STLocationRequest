@@ -1,31 +1,17 @@
-#
-# Be sure to run `pod lib lint STLocationRequest.podspec' to ensure this is a
-# valid spec before submitting.
-#
-# Any lines starting with a # are optional, but their use is encouraged
-# To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html
-#
-
 Pod::Spec.new do |s|
     s.name             = "STLocationRequest"
-    s.version          = "1.5.1"
-    s.summary          = "A simple and elegant way to request the user location"
-    s.description  = <<-DESC
-                        A simple user interface to request the user location. With nice citys and a rotating 3D Map View
-                    DESC
+    s.version          = "3.2.2"
+    s.summary          = "Request the users location services via an 3D 360° Flyover MapView"
     s.homepage         = "https://github.com/SvenTiigi/STLocationRequest"
+    s.social_media_url = 'http://twitter.com/SvenTiigi'
     s.license          = 'MIT'
-    s.author           = { "Sven Tiigi" => "sven@tiigi.de" }
+    s.author           = { "Sven Tiigi" => "sven.tiigi@gmail.com" }
     s.source           = { :git => "https://github.com/SvenTiigi/STLocationRequest.git", :tag => s.version.to_s }
-    s.platform     = :ios, '8.0'
-    s.requires_arc = true
-    s.source_files = 'Pod/Source/**/*'
-    s.resource_bundles = {
-        'STLocationRequest' => ['Pod/Assets/*.png']
-    }
-    s.frameworks = 'UIKit', 'MapKit'
-    s.dependency 'Font-Awesome-Swift'
-    s.resource_bundles = {
-        'STLocationRequest' => ['Pod/Assets/*.storyboard']
-    }
+    s.platform         = :ios, '10.0'
+    s.requires_arc     = true
+    s.source_files     = 'STLocationRequest/**/*'
+    s.frameworks       = 'UIKit', 'MapKit'
+    s.dependency 'FlyoverKit', '1.2.0'
+    s.dependency 'SnapKit', '4.0.0'
+    s.dependency 'SwiftIconFont', '2.8.0'
 end
